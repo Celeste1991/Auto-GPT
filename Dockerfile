@@ -2,6 +2,8 @@
 FROM python:3.11-slim
 
 # Install git
+RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list
+RUN apt-get clean
 RUN apt-get -y update
 RUN apt-get -y install git chromium-driver
 
@@ -18,7 +20,7 @@ USER appuser
 
 # Copy the requirements.txt file and install the requirements
 COPY --chown=appuser:appuser requirements-docker.txt .
-RUN pip install --no-cache-dir --user -r requirements-docker.txt
+RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple/ --no-cache-dir --user -r requirements-docker.txt 
 
 # Copy the application files
 COPY --chown=appuser:appuser autogpt/ ./autogpt
