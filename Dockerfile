@@ -3,7 +3,7 @@ FROM python:3.11-slim
 
 # Install git
 RUN sed -i s/archive.ubuntu.com/mirrors.aliyun.com/g /etc/apt/sources.list 
-RUN sed -i s/security.ubuntu.com/mirrors.aliyun.com/g /etc/apt/sources.list 
+RUN sed -i s/deb.debian.org/mirrors.aliyun.com/g /etc/apt/sources.list 
 RUN apt-get update && apt-get upgrade
 RUN apt-get -y install git chromium-driver
 
